@@ -6,6 +6,7 @@ import 'package:instagram_clone/responsive_screen/mobile_screen_layout/mobile_Sc
 import 'package:instagram_clone/responsive_screen/responsive_layout.dart';
 import 'package:instagram_clone/responsive_screen/web_screen_layout/web_Screen.dart';
 import 'package:instagram_clone/screen/login_screen.dart';
+import 'package:instagram_clone/screen/signin_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 
 void main()async {
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: mobileBackgroundColor,
       ),
-      home: const loginScreen()
+      home: const loginScreen(),
       // const Responsive(mobileScreenlayout: mobileScreen(),webScreenlayout: webScreen(),),
     );
   }
