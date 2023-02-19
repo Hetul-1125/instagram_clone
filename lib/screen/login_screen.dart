@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/resourses/authentication.dart';
 import 'package:instagram_clone/screen/signin_screen.dart';
 import 'package:instagram_clone/utils/image_utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
-import 'homeScreen.dart';
+import '../responsive_screen/mobile_screen_layout/mobile_Screen.dart';
+import '../responsive_screen/responsive_layout.dart';
+import '../responsive_screen/web_screen_layout/web_Screen.dart';
 
 class loginScreen extends StatefulWidget {
   const loginScreen({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _loginScreenState extends State<loginScreen> {
   bool _isLoading=false;
   @override
   void dispose() {
+    super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
   }
@@ -37,7 +39,12 @@ class _loginScreenState extends State<loginScreen> {
       showSnakbar(res, context);
       
     }else{
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Homescreen()));
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const Responsive(
+          mobileScreenlayout: mobileScreen(),
+          webScreenlayout: webScreen(),
+        ),
+      ));
     }
   }
   
