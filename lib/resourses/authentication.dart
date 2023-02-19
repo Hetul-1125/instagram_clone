@@ -47,7 +47,6 @@ class AuthMethod {
           bio.isNotEmpty) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-        print(cred.user!.uid);
         String photoUrl = await StorageMethod()
             .uploadImageToStorage(childname: 'profilepics', file: file);
         UserModel userModel = UserModel(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/resourses/authentication.dart';
-import 'package:instagram_clone/screen/signin_screen.dart';
+import 'package:instagram_clone/screen/signup_screen.dart';
+import 'package:instagram_clone/utils/gloabalVariable.dart';
 import 'package:instagram_clone/utils/image_utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
@@ -39,7 +40,7 @@ class _loginScreenState extends State<loginScreen> {
       showSnakbar(res, context);
       
     }else{
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const Responsive(
           mobileScreenlayout: mobileScreen(),
           webScreenlayout: webScreen(),
@@ -54,7 +55,9 @@ class _loginScreenState extends State<loginScreen> {
     return SafeArea(
         child: Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
+        padding:MediaQuery.of(context).size.width>webScreenSize?
+            EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width/3 ):
+        const EdgeInsets.symmetric(horizontal: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -103,7 +106,7 @@ class _loginScreenState extends State<loginScreen> {
                     borderRadius: BorderRadius.circular(4),
                   )
                 ),
-                child: _isLoading?CircularProgressIndicator(color: Colors.white,):const Text("Log in"),
+                child: _isLoading?const CircularProgressIndicator(color: Colors.white,):const Text("Log in"),
               ),
             ),
             const SizedBox(height: 24,),
@@ -117,7 +120,7 @@ class _loginScreenState extends State<loginScreen> {
                 ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>signInScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const signInScreen()));
                   },
                   child: Container(
                     padding:const  EdgeInsets.symmetric(vertical: 8),

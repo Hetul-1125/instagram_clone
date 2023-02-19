@@ -25,7 +25,7 @@ class _addPostState extends State<addPost> {
         context: context,
         builder: (context) {
           return SimpleDialog(
-            title: Text("Creat Post"),
+            title: const Text("Creat Post"),
             children: [
               SimpleDialogOption(
                 padding: const EdgeInsets.all(20),
@@ -39,7 +39,7 @@ class _addPostState extends State<addPost> {
                 },
               ),
               SimpleDialogOption(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: const Text("Select from gallery"),
                 onPressed: () async {
                   Navigator.of(context).pop();
@@ -157,7 +157,7 @@ class _addPostState extends State<addPost> {
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: TextField(
                         controller: _discriptoncontroller,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "Write a caption....",
                             border: InputBorder.none),
                         maxLines: 8,

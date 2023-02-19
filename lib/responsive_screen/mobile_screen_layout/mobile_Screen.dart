@@ -15,8 +15,9 @@ class _mobileScreenState extends State<mobileScreen> {
   @override
   void initState() {
     super.initState();
-    pageController=PageController();
+    pageController = PageController();
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -24,32 +25,26 @@ class _mobileScreenState extends State<mobileScreen> {
   }
 
   int _page = 0;
-  navigationTap(int page)
-  {
+  navigationTap(int page) {
     pageController.jumpToPage(page);
-
   }
-  onpageChange(int page){
+
+  onpageChange(int page) {
     setState(() {
-      _page=page;
+      _page = page;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body:PageView(
-        children: homeScreenItem,
-
+      body: PageView(
         controller: pageController,
-        onPageChanged:onpageChange ,
+        onPageChanged: onpageChange,
         physics: const NeverScrollableScrollPhysics(),
+        children: homeScreenItem,
       ),
-
-
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: mobileBackgroundColor,
         items: [
@@ -83,7 +78,6 @@ class _mobileScreenState extends State<mobileScreen> {
               color: _page == 4 ? primaryColor : secondaryColor,
             ),
           ),
-
         ],
         onTap: navigationTap,
       ),

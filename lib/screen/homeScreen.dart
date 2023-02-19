@@ -6,7 +6,7 @@ class Homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("homescreen"),
+        title: const Text("homescreen"),
       ),
     );
   }

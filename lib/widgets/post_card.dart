@@ -4,6 +4,7 @@ import 'package:instagram_clone/provider/userProvider.dart';
 import 'package:instagram_clone/resourses/postMethod.dart';
 import 'package:instagram_clone/screen/comment_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/gloabalVariable.dart';
 import 'package:instagram_clone/utils/image_utils.dart';
 import 'package:instagram_clone/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
@@ -44,8 +45,11 @@ class _postCardState extends State<postCard> {
   @override
   Widget build(BuildContext context) {
     final userModel = Provider.of<UserProvider>(context).getUserData;
+    final width=MediaQuery.of(context).size.width;
     return Container(
-      color: mobileBackgroundColor,
+      decoration: BoxDecoration(
+        border: Border.all(color:width>webScreenSize?secondaryColor:mobileBackgroundColor),
+      ),
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +74,7 @@ class _postCardState extends State<postCard> {
                       children: [
                         Text(
                           "${widget.snap['name']}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         )
@@ -89,7 +93,10 @@ class _postCardState extends State<postCard> {
                               shrinkWrap: true,
                               children: ['Delet']
                                   .map((e) => InkWell(
-                                        onTap: () {},
+                                        onTap: ()async {
+                                          await PostMethod().deletPost(postId: widget.snap['postId']);
+                                          Navigator.of(context).pop();
+                                        },
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 12, vertical: 16),
@@ -131,11 +138,7 @@ class _postCardState extends State<postCard> {
                   duration: const Duration(milliseconds: 200),
                   opacity: isLikeAnimating ? 1 : 0,
                   child: likeAnimation(
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                      size: 120,
-                    ),
+
                     isAnimating: isLikeAnimating,
                     duration: const Duration(milliseconds: 400),
                     onEnd: () {
@@ -143,6 +146,11 @@ class _postCardState extends State<postCard> {
                         isLikeAnimating = false;
                       });
                     },
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 120,
+                    ),
                   ),
                 )
               ],
@@ -222,7 +230,7 @@ class _postCardState extends State<postCard> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child:  Text(
-                      "View all ${comment} comment",
+                      "View all $comment comment",
                       style: const TextStyle(fontSize: 16, color: secondaryColor),
                     ),
                   ),

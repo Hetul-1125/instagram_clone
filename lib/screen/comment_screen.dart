@@ -33,7 +33,7 @@ class _commentScreenState extends State<commentScreen> {
         leading: IconButton(
           onPressed: () {
             Navigator.of(context)
-                .pop(MaterialPageRoute(builder: (context) => feedScreen()));
+                .pop(MaterialPageRoute(builder: (context) => const feedScreen()));
           },
           icon: const Icon(Icons.arrow_back),
         ),

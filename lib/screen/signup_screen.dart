@@ -22,18 +22,12 @@ class _loginScreenState extends State<signInScreen> {
   final TextEditingController _bioController = TextEditingController();
   Uint8List? _image;
   bool _isLoading = false;
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _nameController.dispose();
-    _bioController.dispose();
-  }
+
 
   void selectImage() async {
-    Uint8List _im = await pickImage(ImageSource.gallery);
+    Uint8List im = await pickImage(ImageSource.gallery);
     setState(() {
-      _image = _im;
+      _image = im;
     });
   }
 
@@ -52,18 +46,28 @@ class _loginScreenState extends State<signInScreen> {
       _isLoading = false;
     });
 
-    if (res != 'success') {
-      showSnakbar(res, context);
-    } else {
-      Navigator.of(context).push(MaterialPageRoute(
+    if (res == 'success') {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const Responsive(
           mobileScreenlayout: mobileScreen(),
           webScreenlayout: webScreen(),
         ),
       ));
+
+    } else {
+      setState(() {
+        _isLoading=false;
+      });
+      showSnakbar(res, context);
     }
   }
-
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+    _bioController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(

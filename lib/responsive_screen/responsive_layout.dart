@@ -23,8 +23,8 @@ class _ResponsiveState extends State<Responsive> {
     getData();
   }
   getData()async{
-    UserProvider _userProvider=Provider.of(context,listen: false);
-    await _userProvider.userData();
+    UserProvider userProvider=Provider.of(context,listen: false);
+    await userProvider.userData();
 
   }
 

@@ -5,7 +5,7 @@ import 'package:instagram_clone/model/userModel.dart';
 
 class UserProvider extends ChangeNotifier{
  UserModel? _userData;
- FirebaseFirestore _firestore=FirebaseFirestore.instance;
+ final FirebaseFirestore _firestore=FirebaseFirestore.instance;
 userData()async{
   UserModel userModel;
   DocumentSnapshot value=await _firestore.collection('user').doc(FirebaseAuth.instance.currentUser!.uid).get();
